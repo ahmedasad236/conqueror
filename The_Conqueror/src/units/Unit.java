@@ -7,7 +7,7 @@ public abstract class Unit {
     double idleUpkeep; //The amount of food a unit will consume when being idle.
     double marchingUpkeep; //The amount of food a unit will consume when marching to another city.
     double siegeUpkeep; //The amount of food a unit will consume when laying siege.
-
+    
     public Unit(int level,int maxSoldierConunt,double idleUpkeep, double
             marchingUpkeep,double siegeUpkeep)
     {
@@ -17,4 +17,26 @@ public abstract class Unit {
         this.marchingUpkeep = marchingUpkeep;
         this.siegeUpkeep = siegeUpkeep;
     }
+
+    //Getters
+    public int getLevel() {
+        return level;
+    }
+
+    public int getMaxSoldierCount() {
+        return maxSoldierCount;
+    }
+
+    public int getCurrentSoldierCount() {
+        return currentSoldierCount;
+    }
+
+    public double getIdleUpkeep() {
+        return idleUpkeep;
+    }
+
+    public double getSiegeUpKeep() {
+        return siegeUpkeep;
+    }
+    
 }
