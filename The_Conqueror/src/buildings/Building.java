@@ -1,16 +1,35 @@
 package buildings;
 
 public abstract class Building {
-    int cost;
-    int level;
-    int upgradeCost;
-    boolean coolDown;
+    private int cost;
+    private int level=1;
+    private int upgradeCost;
+    private boolean coolDown=true;
 
+    public int getCost(){
+        return cost;
+    }
+    public void setLevel(int l){
+        this.level=l;
+    }
+    public int getLevel(){
+        return level;
+    }
+    public void setUpgradeCost(int upgrade){
+        this.upgradeCost=upgrade;
+    }
+    public int getUpgradeCost(){
+        return upgradeCost;
+    }
+    public void setCoolDown(boolean cool){
+        this.coolDown=cool;
+    }
+    public boolean isCoolDown(){
+        return coolDown;
+    }
     public Building(int cost,int upgradeCost) {
-        this.coolDown = true;
         this.cost = cost;
         this.upgradeCost = upgradeCost;
-        this.level = 1;
     }
     
 }

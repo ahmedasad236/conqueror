@@ -1,9 +1,24 @@
 package buildings;
 
 public abstract class MilitaryBuilding extends Building {
-    int recruitmentCost; //The cost for recruiting a unit.
-    int currentRecruit; //Current number of units recruited by a building inside a turn.
-    static final int MAX_RECRUIT = 3; //Maximum number of units a building can recruit per turn.
+    private int recruitmentCost; //The cost for recruiting a unit.
+    private int currentRecruit; //Current number of units recruited by a building inside a turn.
+    private static final int maxRecruit = 3; //Maximum number of units a building can recruit per turn.
+
+    public void setRecruitmentCost(int RecCost){
+        recruitmentCost=RecCost;
+    }
+    public int getRecruitmentCost(){
+        return recruitmentCost;
+    }
+    public void setCurrentRecuruit(int CurRec){
+        currentRecruit=CurRec;
+    }
+    public int getCurrentRecruit(){
+        return currentRecruit;
+    }
+    public int getMaxRecruit(){
+        return maxRecruit;}
 
     public MilitaryBuilding(int cost, int upgradeCost,int recruitmentCost) {
         super(cost, upgradeCost);
