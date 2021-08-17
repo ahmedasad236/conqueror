@@ -4,16 +4,14 @@ import java.io.IOException;
 
 public class Game {
 
-    Player player; //The current player of the game.
-    ArrayList<City> availableCities; //An ArrayList containing the cities in the game.
-    ArrayList<Distance> distances; //An ArrayList containing the distances between the cities.
-    int currentTurnCount; //Current number of turns.
-    final static int MAX_TURN_COUNT = 30; //Maximum number of the turns int the game;
-    final static double INITIAL_TRES = 5000;
+    private Player player; //The current player of the game.
+    private ArrayList<City> availableCities; //An ArrayList containing the cities in the game.
+    private ArrayList<Distance> distances; //An ArrayList containing the distances between the cities.
+    private int currentTurnCount=1; //Current number of turns.
+    private final static int maxTurnCount = 30; //Maximum number of the turns int the game;
+
     public Game(String playerName,String playerCity) throws IOException {
         this.player = new Player(playerName);
-        player.setTreasury(INITIAL_TRES);
-        this.currentTurnCount = 1;
         this.availableCities = new ArrayList<>();
         this.distances = new ArrayList<>();
     }
@@ -33,6 +31,9 @@ public class Game {
 
     public int getCurrentTurnCount() {
         return currentTurnCount;
+    }
+    public int getMaxTurnCount(){
+        return maxTurnCount;
     }
 
     //Setters
