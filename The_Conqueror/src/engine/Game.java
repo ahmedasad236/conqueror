@@ -1,7 +1,9 @@
 package engine;
+
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.*;
+import engine.ReadingCSVFile;
 
 public class Game {
 
@@ -61,28 +63,11 @@ public class Game {
     }
 
     private void loadCitiesAndDistances() throws IOException {
-
-        String filePath = "/home/a_asaad22/Ahmed/Courses/Java/projects/the_conqueror/conqueror/The_Conqueror/src/engine/distances.csv";
-        BufferedReader reader = null;
-        String line = "";
-
-        reader = new BufferedReader(new FileReader(filePath));
-        
-        while((line = reader.readLine()) != null) {
-            String[] row = line.split(",");
-            String to = "", from = "";
-            int dist = 0;
-            for(int i = 0; i < row.length; i++) {
-                if(i == 0)
-                    from = row[i];
-                
-                else if (i == 1)
-                    to = row[i];
-                
-                else 
-                    dist = Integer.parseInt(row[i]);
-            }
-
+        ArrayList<String[]> Csv= ReadingCSVFile.readFile("./CSVs/distances.csv");
+        for(String[]row :Csv) {
+            from = row[0];
+            to = row[1];
+            dist = Integer.parseInt(row[2]);
             Distance distance = new Distance(from, to, dist);
             addToDistances(distance);
             City FROM =  new City(from);
@@ -90,7 +75,5 @@ public class Game {
             addToCities(FROM);
             addToCities(TO);
         }
-
-        reader.close();
     }   
 }
