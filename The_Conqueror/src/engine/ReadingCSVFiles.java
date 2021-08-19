@@ -16,7 +16,7 @@ public class ReadingCSVFile {
             String[] row = line.split(",");
             Csv.add(row);
         }
-        return csv;
+        return Csv;
     }
     
 }
