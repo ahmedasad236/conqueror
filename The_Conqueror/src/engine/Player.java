@@ -46,4 +46,7 @@ public class Player {
         food = f;
     }
 
+    public void addToControlledCIties(City city) {
+        controlledCities.add(city);
+    }
 }
