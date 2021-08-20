@@ -1,9 +1,7 @@
 package engine;
 
 import java.util.ArrayList;
-import java.io.BufferedReader;
 import java.io.*;
-import engine.ReadingCSVFile;
 
 public class Game {
 
@@ -63,11 +61,11 @@ public class Game {
     }
 
     private void loadCitiesAndDistances() throws IOException {
-        ArrayList<String[]> Csv= ReadingCSVFile.readFile("./CSVs/distances.csv");
+        ArrayList<String[]> Csv= ReadingCSVFiles.readFile("./CSVs/distances.csv");
         for(String[]row :Csv) {
-            from = row[0];
-            to = row[1];
-            dist = Integer.parseInt(row[2]);
+            String from = row[0];
+            String to = row[1];
+            int dist = Integer.parseInt(row[2]);
             Distance distance = new Distance(from, to, dist);
             addToDistances(distance);
             City FROM =  new City(from);

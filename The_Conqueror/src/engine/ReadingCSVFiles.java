@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ReadingCSVFile {
+public class ReadingCSVFiles {
     public static ArrayList<String[]> readFile(String path) throws IOException{
         String line="";
         FileReader fileReader=new FileReader(path);
@@ -16,6 +16,7 @@ public class ReadingCSVFile {
             String[] row = line.split(",");
             Csv.add(row);
         }
+        br.close();
         return Csv;
     }
     
