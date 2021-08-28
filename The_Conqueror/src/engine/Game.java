@@ -82,7 +82,7 @@ public class Game {
     //Utility functions
     private ArrayList<Unit> createUnits(ArrayList <String[]> rows) { 
         
-        ArrayList<Unit> myUnits = null;
+        ArrayList<Unit> myUnits = new ArrayList<Unit>();
 
         for(String[] row : rows) 
             myUnits.add(createUnit(row));
