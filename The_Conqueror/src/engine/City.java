@@ -59,4 +59,14 @@ public class City {
         underSiege = s;
     }
 
+    @Override
+    public boolean equals(Object o){
+        if (o == this) return true;
+        if(! (o instanceof City)){
+            return false;
+        }
+        City city = (City) o;
+        return city.getName().equals(this.getName());
+    }
+
 }
