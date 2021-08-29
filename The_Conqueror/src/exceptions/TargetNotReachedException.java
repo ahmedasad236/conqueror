@@ -2,11 +2,11 @@ package exceptions;
 
 public class TargetNotReachedException extends Exception {
     
-    TargetNotReachedException() {
+    public TargetNotReachedException() {
         super();
     }
 
-    TargetNotReachedException(String s) {
+    public TargetNotReachedException(String s) {
         super(s);
     }
 
