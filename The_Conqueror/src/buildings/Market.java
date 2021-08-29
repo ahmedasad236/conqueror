@@ -1,17 +1,14 @@
 package buildings;
-
 import exceptions.BuildingInCoolDownException;
 import exceptions.MaxLevelException;
 
-public class Farm extends EconomicBuilding {
-    
-    private final static int FARM_COST = 1000;
-    private final static int []FARM_UPGRADE_COSTS = {500, 700};
-    
-    public Farm() {
-        super(FARM_COST, FARM_UPGRADE_COSTS[0]);
-    }
+public class Market extends EconomicBuilding {
+    private final static int MARKET_COST = 1500;
+    private final static int []MARKET_UPGRADE_COSTS = {700, 1000};
 
+    public Market() {
+        super(MARKET_COST, MARKET_UPGRADE_COSTS[0]);
+    }
 
     @Override
     public void upgrade() throws BuildingInCoolDownException, MaxLevelException {
@@ -21,7 +18,7 @@ public class Farm extends EconomicBuilding {
         switch(lev) {
             case 1:
                 this.setLevel(2);
-                this.setUpgradeCost(FARM_UPGRADE_COSTS[1]);
+                this.setUpgradeCost(MARKET_UPGRADE_COSTS[1]);
                 break;
             
             case 2:
