@@ -2,11 +2,11 @@ package exceptions;
 
 public class BuildingException extends Exception {
     
-    BuildingException() {
+    public BuildingException() {
         super();
     }
 
-    BuildingException(String s) {
+    public BuildingException(String s) {
         super(s);
     } 
 

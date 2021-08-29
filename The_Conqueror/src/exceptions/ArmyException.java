@@ -2,11 +2,11 @@ package exceptions;
 
 public class ArmyException extends Exception {
     
-    ArmyException() {
+    public ArmyException() {
         super();
     }
 
-    ArmyException(String s) {
+    public ArmyException(String s) {
         super(s);
     }
 

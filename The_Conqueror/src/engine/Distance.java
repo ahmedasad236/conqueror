@@ -24,4 +24,19 @@ public class Distance {
         return distance;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        
+        if (obj == this) return true;
+        
+        if(! (obj instanceof City)){
+    
+            return false;
+        }
+
+        Distance dist = (Distance) obj;
+        return dist.getFromCity().equals(this.getFromCity()) && dist.getToCity().equals(this.getToCity())
+         && this.distance == dist.distance;
+    }
+
 }
