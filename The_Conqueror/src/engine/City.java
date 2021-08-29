@@ -60,12 +60,17 @@ public class City {
     }
 
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
+
         if (o == this) return true;
+        
         if(! (o instanceof City)){
+    
             return false;
         }
+        
         City city = (City) o;
+        
         return city.getName().equals(this.getName());
     }
 
