@@ -17,29 +17,10 @@ public class Barracks extends MilitaryBuilding {
 
     @Override
     public void upgrade() throws BuildingInCoolDownException, MaxLevelException {
-        
-        int lev = this.getLevel();
-        
-        if(this.isCoolDown())
-            throw new BuildingInCoolDownException();
-        
 
-        switch(lev) {
-            case 1:
-                this.setLevel(2);
-                this.setUpgradeCost(BARRACK_UPGRADE_COSTS[1]);
-                this.setCurrentRecuruit(BARRACK_RECRUITMENT_COSTS[1]);
-                break;
-            
-            case 2:
-                this.setLevel(3);
-                this.setCurrentRecuruit(BARRACK_RECRUITMENT_COSTS[2]);
-                break;
-            
-            default:
-                throw new MaxLevelException();
-        }
-        
-        //this.setCoolDown(false);
+        super.upgrade();
+        setUpgradeCost(BARRACK_UPGRADE_COSTS[getLevel()]);
+        setRecruitmentCost(BARRACK_RECRUITMENT_COSTS[getLevel()]);
+
     }
 }

@@ -1,11 +1,13 @@
 package buildings;
-import exceptions.*;
+import exceptions.BuildingInCoolDownException;
+import exceptions.MaxLevelException;
 
 public abstract class Building {
     private int cost;
     private int level=1;
     private int upgradeCost;
     private boolean coolDown=true;
+    final static int MAX_LEVEL = 3; 
 
     public int getCost(){
         return cost;
@@ -33,12 +35,17 @@ public abstract class Building {
         this.upgradeCost = upgradeCost;
     }
     
+
     public void upgrade() throws BuildingInCoolDownException, MaxLevelException{
+        
         if(isCoolDown()){
-            throw new BuildingInCoolDownException("Building is cooling down");}
-        if (getLevel()==3){
+            throw new BuildingInCoolDownException("Building is cooling down");
+        }
+
+        if (getLevel() == MAX_LEVEL){
             throw new MaxLevelException("Max Level has been reached");
         }
+ 
         setLevel(getLevel()+1);
         setCoolDown(true);   
     }
