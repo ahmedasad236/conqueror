@@ -15,30 +15,11 @@ public class ArcheryRange extends MilitaryBuilding {
 
     @Override
     public void upgrade() throws BuildingInCoolDownException, MaxLevelException {
-        
-        int lev = this.getLevel();
-        
-        if(this.isCoolDown())
-            throw new BuildingInCoolDownException();
-        
 
-        switch(lev) {
-            case 1:
-                this.setLevel(2);
-                this.setUpgradeCost(ARCH_UPGRADE_COSTS[1]);
-                this.setCurrentRecuruit(ARCH_RECRUITMENT_COSTS[1]);
-                break;
-            
-            case 2:
-                this.setLevel(3);
-                this.setCurrentRecuruit(ARCH_RECRUITMENT_COSTS[2]);
-                break;
-            
-            default:
-                throw new MaxLevelException();
-        }
-        
-        //this.setCoolDown(false);
+        super.upgrade();
+        setUpgradeCost(ARCH_UPGRADE_COSTS[getLevel()]);
+        setRecruitmentCost(ARCH_RECRUITMENT_COSTS[getLevel()]);
 
     }
+    
 }

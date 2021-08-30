@@ -2,11 +2,11 @@ package exceptions;
 
 public class NotEnoughGoldException extends Exception{
 
-    NotEnoughGoldException() {
+    public NotEnoughGoldException() {
         super();
     }
 
-    NotEnoughGoldException(String s) {
+    public NotEnoughGoldException(String s) {
         super(s);
     }
     

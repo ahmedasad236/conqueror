@@ -2,11 +2,11 @@ package exceptions;
 
 public class MaxCapacityException extends Exception {
 
-    MaxCapacityException() {
+    public MaxCapacityException() {
         super();
     }
 
-    MaxCapacityException(String s) {
+    public MaxCapacityException(String s) {
         super(s);
     }
     

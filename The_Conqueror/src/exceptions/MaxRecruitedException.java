@@ -2,11 +2,11 @@ package exceptions;
 
 public class MaxRecruitedException extends Exception{
 
-    MaxRecruitedException() {
+    public MaxRecruitedException() {
         super();
     }
 
-    MaxRecruitedException(String s) {
+    public MaxRecruitedException(String s) {
         super(s);
     }
     
