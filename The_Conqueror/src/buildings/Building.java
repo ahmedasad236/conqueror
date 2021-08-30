@@ -33,6 +33,14 @@ public abstract class Building {
         this.upgradeCost = upgradeCost;
     }
     
-    public abstract void upgrade() throws BuildingInCoolDownException, MaxLevelException;
+    public void upgrade() throws BuildingInCoolDownException, MaxLevelException{
+        if(isCoolDown()){
+            throw new BuildingInCoolDownException("Building is cooling down");}
+        if (getLevel()==3){
+            throw new MaxLevelException("Max Level has been reached");
+        }
+        setLevel(getLevel()+1);
+        setCoolDown(true);   
+    }
     
 }
