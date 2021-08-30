@@ -18,23 +18,9 @@ public class Market extends EconomicBuilding {
 
     @Override
     public void upgrade() throws BuildingInCoolDownException, MaxLevelException {
-            
-        int lev = this.getLevel();
-        
-        switch(lev) {
-            case 1:
-                this.setLevel(2);
-                this.setUpgradeCost(MARKET_UPGRADE_COSTS[1]);
-                break;
-            
-            case 2:
-                this.setLevel(3);
-                break;
-            
-            default:
-                throw new MaxLevelException();
-        }
-        
-    }
 
-}
+        super.upgrade();
+        setUpgradeCost(MARKET_UPGRADE_COSTS[getLevel()]);
+        }
+    
+    }
