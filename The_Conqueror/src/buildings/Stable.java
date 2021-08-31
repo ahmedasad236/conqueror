@@ -1,6 +1,9 @@
 package buildings;
-import exceptions.BuildingInCoolDownException;
-import exceptions.MaxLevelException;
+import exceptions.*;
+import units.Unit;
+import units.Cavalry;
+import engine.Game;
+
 
 public class Stable extends MilitaryBuilding {
 
@@ -19,5 +22,20 @@ public class Stable extends MilitaryBuilding {
         setUpgradeCost(STABLE_UPGRADE_COSTS[getLevel()]);
         setRecruitmentCost(STABLE_RECRUITMENT_COSTS[getLevel()]);
 
+    }
+
+    @Override
+    public Unit recruirt() throws BuildingInCoolDownException, MaxRecruitedException {
+        if(isCoolDown()){
+            throw new BuildingInCoolDownException("Building is cooling down");
+        }
+       if (getCurrentRecruit() == getMaxRecruit()){
+               throw new MaxRecruitedException("Max Recruitment has been reached");
+        }
+        Unit cav =new Cavalry(this.getLevel(),(int)Game.UNIT_ATTRIBUTES[this.getLevel() +2][0], Game.UNIT_ATTRIBUTES[this.getLevel() +2][1], 
+        Game.UNIT_ATTRIBUTES[this.getLevel() +2][2], Game.UNIT_ATTRIBUTES[this.getLevel() +2][3]);
+        
+        setCurrentRecuruit(getCurrentRecruit()+1);
+        return cav;
     }
 }
