@@ -2,14 +2,16 @@ package units;
 
 import java.util.ArrayList;
 
+import exceptions.MaxCapacityException;
+
 public class Army {
     
-    private Status currenStatus=Status.IDLE; //The current status of an army. Initially, an army is IDLE
-    private ArrayList<Unit> units;  //An ArrayList containing the units of the army
-    private int distancetoTarget=-1;   //The distance needed to reach the target city.
-    private String target="";          //The target city. Initially the target location is ""
-    private String currentLocation; //The current location of the army.
-    private final static int maxToHold = 10;          //The maximum number of units a unit can hold
+    private Status currenStatus=Status.IDLE; 
+    private ArrayList<Unit> units;  
+    private int distancetoTarget=-1;   
+    private String target="";          
+    private String currentLocation; 
+    private final static int maxToHold = 10;          
 
     public void setCurrenStatus(Status x){
         this.currenStatus=x;
@@ -48,5 +50,34 @@ public class Army {
         setCurrentLocation(currentLocation);
         this.units = new ArrayList<>();
     }
+
+    private void removeUnit(Unit unit) {
+        units.remove(unit);
+    }
+
+    private void addUnit(Unit unit) {
+        units.add(unit);
+    }
+
+    public void relocateUnit(Unit unit) throws MaxCapacityException {
+        if(this.units.size() == maxToHold) 
+            throw new MaxCapacityException("The units of the army are full");
+        
+        removeUnit(unit);
+        addUnit(unit);
+    }
+
+    public void handleAttackedUnit(Unit u) {
+        if(u.getCurrentSoldierCount() <= 0)
+            removeUnit(u);
+    }
     
+
+    public double foodNeeded() {
+        double food = 0.0;
+        for(Unit unit : units)
+            food += unit.getFoodNeeded();
+
+        return food;
+    }
 }

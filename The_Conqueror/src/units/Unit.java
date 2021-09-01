@@ -3,12 +3,12 @@ package units;
 import exceptions.FriendlyFireException;
 
 public abstract class Unit {
-    private int level; //The current level of a unit.
-    private int maxSoldierCount; //The maximum number of soldiers a unit can hold.
-    private int currentSoldierCount; //The current number of soldiers inside a unit.
-    private double idleUpkeep; //The amount of food a unit will consume when being idle.
-    private double marchingUpkeep; //The amount of food a unit will consume when marching to another city.
-    private double siegeUpkeep; //The amount of food a unit will consume when laying siege.
+    private int level; 
+    private int maxSoldierCount; 
+    private int currentSoldierCount; 
+    private double idleUpkeep; 
+    private double marchingUpkeep; 
+    private double siegeUpkeep; 
     private double [] ArcherFactor = new double[3]; 
     private double [] InfantryFactor = new double[3];
     private double [] CavalryFactor = new double[3];
@@ -28,9 +28,11 @@ public abstract class Unit {
     public void setCurrentSoldierCount(int count){
         this.currentSoldierCount=count;
     }
+
     public void setParentArmy(Army Parent){
         this.ParentArmy=Parent;
     }
+
     protected void setArcherFactor(double x,double y,double z){
         ArcherFactor[0]=x;
         ArcherFactor[1]=y;
@@ -46,6 +48,7 @@ public abstract class Unit {
         CavalryFactor[1]=y;
         CavalryFactor[2]=z;
     }
+
     //Getters
     public int getLevel() {
         return level;
@@ -100,4 +103,40 @@ public abstract class Unit {
         target.setCurrentSoldierCount(target.getCurrentSoldierCount()-(int)(attacked[this.getLevel()-1]*this.getCurrentSoldierCount()));
     }
     
+    public Army getParentArmy(){
+        return this.ParentArmy;
+    }
+
+    public double getFoodNeeded() {
+        
+        Status stat = ParentArmy.getCurrenStatus();
+        double keepUp = 0.0;
+
+        switch (stat) {
+            case IDLE :
+                keepUp = idleUpkeep;
+                break;
+            
+            case MARCHING:
+                keepUp = marchingUpkeep;
+                break;
+            
+            case BESIEGING:
+                keepUp = siegeUpkeep;
+                break;
+        }    
+
+        return keepUp * currentSoldierCount;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Unit))
+            return false;
+        
+        Unit unit = (Unit)obj;
+        return (this.currentSoldierCount == unit.currentSoldierCount && this.level == unit.level
+        && this.idleUpkeep == unit.idleUpkeep && this.marchingUpkeep == unit.marchingUpkeep &&
+        this.siegeUpkeep == unit.siegeUpkeep && this.ParentArmy == unit.ParentArmy);
+    }    
 }
