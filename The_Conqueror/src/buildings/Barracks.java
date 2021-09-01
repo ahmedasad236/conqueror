@@ -1,7 +1,9 @@
 package buildings;
 
-import exceptions.BuildingInCoolDownException;
-import exceptions.MaxLevelException;
+import exceptions.*;
+import units.Infantry;
+import units.Unit;
+import engine.Game;
 
 public class Barracks extends MilitaryBuilding {
     private final static int BARRCK_COST = 2000;
@@ -22,5 +24,21 @@ public class Barracks extends MilitaryBuilding {
         setUpgradeCost(BARRACK_UPGRADE_COSTS[getLevel()]);
         setRecruitmentCost(BARRACK_RECRUITMENT_COSTS[getLevel()]);
 
+    }
+
+    @Override
+    public Unit recruirt() throws BuildingInCoolDownException, MaxRecruitedException{
+        if(isCoolDown()){
+            throw new BuildingInCoolDownException("Building is cooling down");
+        }
+
+        if (getCurrentRecruit() == getMaxRecruit()){
+            throw new MaxRecruitedException("Max Recruitment has been reached");
+        }
+        Unit inf=new Infantry(this.getLevel(),(int)Game.UNIT_ATTRIBUTES[this.getLevel() + 5][0], Game.UNIT_ATTRIBUTES[this.getLevel() + 5][1], 
+        Game.UNIT_ATTRIBUTES[this.getLevel() + 5][2], Game.UNIT_ATTRIBUTES[this.getLevel() + 5][3]);
+        
+        setCurrentRecuruit(getCurrentRecruit()+1);
+        return inf;
     }
 }

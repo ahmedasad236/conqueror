@@ -6,7 +6,7 @@ import units.*;
 public class Game {
 
     //[maxSoldiers, idlKeep, marchKeep, SiegeKeep]
-    private static final double[][] UNIT_ATTRIBUTES = {
+    public static final double[][] UNIT_ATTRIBUTES = {
        {60, 0.4, 0.5, 0.6}, //Archer level 1
        {60, 0.4, 0.5, 0.6}, //Archer level 2
        {70, 0.5, 0.6, 0.7}, //Archer level 3
