@@ -103,10 +103,6 @@ public abstract class Unit {
         target.setCurrentSoldierCount(target.getCurrentSoldierCount()-(int)(attacked[this.getLevel()-1]*this.getCurrentSoldierCount()));
     }
     
-    public Army getParentArmy(){
-        return this.ParentArmy;
-    }
-
     public double getFoodNeeded() {
         
         Status stat = ParentArmy.getCurrenStatus();
