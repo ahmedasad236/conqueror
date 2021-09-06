@@ -51,11 +51,11 @@ public class Army {
         this.units = new ArrayList<>();
     }
 
-    private void removeUnit(Unit unit) {
+    public void removeUnit(Unit unit) {
         units.remove(unit);
     }
 
-    private void addUnit(Unit unit) {
+    public void addUnit(Unit unit) {
         units.add(unit);
     }
 
@@ -63,7 +63,7 @@ public class Army {
         if(this.units.size() == maxToHold) 
             throw new MaxCapacityException("The units of the army are full");
         
-        removeUnit(unit);
+        unit.getParentArmy().removeUnit(unit);;
         addUnit(unit);
     }
 
