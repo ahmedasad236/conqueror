@@ -10,4 +10,8 @@ public class Cavalry extends Unit{
         setCavalryFactor(0.2, 0.2, 0.3);
     }
     
+    @Override
+    public String getType() {
+        return "Cavalry";
+    }
 }

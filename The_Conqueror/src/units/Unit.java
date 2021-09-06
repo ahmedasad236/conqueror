@@ -1,5 +1,4 @@
 package units;
-
 import exceptions.FriendlyFireException;
 
 public abstract class Unit {
@@ -54,6 +53,8 @@ public abstract class Unit {
         return level;
     }
 
+    public abstract String getType();
+
     public int getMaxSoldierCount() {
         return maxSoldierCount;
     }
@@ -103,10 +104,6 @@ public abstract class Unit {
         target.setCurrentSoldierCount(target.getCurrentSoldierCount()-(int)(attacked[this.getLevel()-1]*this.getCurrentSoldierCount()));
     }
     
-    public Army getParentArmy(){
-        return this.ParentArmy;
-    }
-
     public double getFoodNeeded() {
         
         Status stat = ParentArmy.getCurrenStatus();
@@ -127,7 +124,7 @@ public abstract class Unit {
         }    
 
         return keepUp * currentSoldierCount;
-    }
+    } 
 
     @Override
     public boolean equals(Object obj) {
