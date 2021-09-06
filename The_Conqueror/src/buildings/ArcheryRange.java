@@ -42,4 +42,8 @@ public class ArcheryRange extends MilitaryBuilding {
         return arch;
     }
     
+    @Override
+    public String getUnitType() {
+        return "Archer";
+    }
 }

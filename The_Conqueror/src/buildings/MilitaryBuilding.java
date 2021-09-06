@@ -26,6 +26,7 @@ public abstract class MilitaryBuilding extends Building {
         super(cost, upgradeCost);
         this.recruitmentCost = recruitmentCost;
     }
-    public abstract Unit recruirt()throws BuildingInCoolDownException, MaxRecruitedException;
     
+    public abstract Unit recruirt()throws BuildingInCoolDownException, MaxRecruitedException;
+    public abstract String getUnitType();    
 }

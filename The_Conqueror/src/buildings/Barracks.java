@@ -27,6 +27,11 @@ public class Barracks extends MilitaryBuilding {
     }
 
     @Override
+    public String getUnitType() {
+        return "Infantry";
+    }
+
+    @Override
     public Unit recruirt() throws BuildingInCoolDownException, MaxRecruitedException{
         if(isCoolDown()){
             throw new BuildingInCoolDownException("Building is cooling down");
