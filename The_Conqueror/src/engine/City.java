@@ -1,13 +1,11 @@
 package engine;
-
 import java.util.ArrayList;
-
 import buildings.EconomicBuilding;
 import buildings.MilitaryBuilding;
 import units.Army;
 
 public class City {
-    private String name; //The name of the city
+    private String name; 
     private ArrayList<EconomicBuilding> economicBuildings; 
     private ArrayList<MilitaryBuilding> militaryBuildings;
     private Army defendingArmy;
@@ -36,7 +34,7 @@ public class City {
 
     public Army getDefendingArmy() {
         return defendingArmy;
-    }
+    }   
 
     public int getTurnsUnderSiege() {
         return turnsUnderSiege;
@@ -59,6 +57,15 @@ public class City {
         underSiege = s;
     }
 
+    public MilitaryBuilding findMilitaryBuilding(String type) {
+        
+        for(MilitaryBuilding building : militaryBuildings)
+            if(type.equals(building.getUnitType()))
+                return building;
+        
+        return null;       
+    }
+    
     @Override
     public boolean equals(Object o) {
 
@@ -74,4 +81,6 @@ public class City {
         return city.getName().equals(this.getName());
     }
 
+
+    
 }

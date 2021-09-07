@@ -1,5 +1,4 @@
 package units;
-
 import exceptions.FriendlyFireException;
 
 public abstract class Unit {
@@ -53,6 +52,8 @@ public abstract class Unit {
     public int getLevel() {
         return level;
     }
+
+    public abstract String getType();
 
     public int getMaxSoldierCount() {
         return maxSoldierCount;
@@ -123,7 +124,7 @@ public abstract class Unit {
         }    
 
         return keepUp * currentSoldierCount;
-    }
+    } 
 
     @Override
     public boolean equals(Object obj) {

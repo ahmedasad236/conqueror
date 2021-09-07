@@ -29,13 +29,20 @@ public class Stable extends MilitaryBuilding {
         if(isCoolDown()){
             throw new BuildingInCoolDownException("Building is cooling down");
         }
-       if (getCurrentRecruit() == getMaxRecruit()){
+        
+        if (getCurrentRecruit() == getMaxRecruit()){
                throw new MaxRecruitedException("Max Recruitment has been reached");
         }
+        
         Unit cav =new Cavalry(this.getLevel(),(int)Game.UNIT_ATTRIBUTES[this.getLevel() +2][0], Game.UNIT_ATTRIBUTES[this.getLevel() +2][1], 
         Game.UNIT_ATTRIBUTES[this.getLevel() +2][2], Game.UNIT_ATTRIBUTES[this.getLevel() +2][3]);
         
         setCurrentRecuruit(getCurrentRecruit()+1);
         return cav;
+    }
+
+    @Override
+    public String getUnitType() {
+        return "Cavalry";
     }
 }
