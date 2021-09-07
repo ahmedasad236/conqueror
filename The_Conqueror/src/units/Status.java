@@ -1,6 +1,6 @@
 package units;
 // enum to determine the status of the Army
-enum Status
+public enum Status
 {
     IDLE,
     MARCHING,
