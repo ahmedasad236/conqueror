@@ -14,8 +14,11 @@ import exceptions.NotEnoughGoldException;
 import exceptions.BuildingInCoolDownException;
 import exceptions.MaxRecruitedException;
 import exceptions.MaxLevelException;
+import exceptions.FriendlyCityException;
+import exceptions.TargetNotReachedException;
 import units.Army;
 import units.Unit;
+import units.Status;
 
 public class Player {
     private String name; //The name of the player
@@ -138,4 +141,22 @@ public class Player {
         b.upgrade();
         treasury -= cost;
     }
+    public void initiateArmy(City city, Unit unit){
+        Army a =new Army(city.getName());
+        a.addUnit(unit);
+        city.getDefendingArmy().removeUnit(unit);
+        unit.setParentArmy(a);
+        getControlledArmy().add(a);
+    }
+    public void laySiege(Army army,City city) throws TargetNotReachedException,FriendlyCityException{
+        if(!army.getCurrentLocation().equals(city.getName())){
+            throw new TargetNotReachedException("You still haven't reached the targeted city");
+        }
+        if(getControlledCities().contains(city)){
+            throw new FriendlyCityException("You Cannot siege a controlled city");
+        }
+        army.setCurrenStatus(Status.BESIEGING);
+        city.setTurnsUnderSiege(city.getTurnsUnderSiege()+1);
+    }
+
 }
