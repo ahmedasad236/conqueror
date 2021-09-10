@@ -173,4 +173,26 @@ public class Game {
         }
     }
 
+    int findDistance(String from, String to) {
+
+        for (Distance dist : distances) {
+            if ((dist.getFromCity().equals(from) && dist.getToCity().equals(to))
+                    || (dist.getFromCity().equals(to) && dist.getToCity().equals(from)))
+                return dist.getDistance();
+        }
+
+        return 0;
+    }
+
+    public void targetCity(Army army, String targetName) {
+
+        if (army.getCurrenStatus() == Status.MARCHING)
+            return;
+
+        int dist = findDistance(army.getCurrentLocation(), targetName);
+        army.setDistancetoTarget(dist);
+        army.setTarget(targetName);
+        army.setCurrenStatus(Status.MARCHING);
+    }
+
 }
