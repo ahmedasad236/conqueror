@@ -65,10 +65,10 @@ public class Game {
             // if it is not the selected City,
             if (city.getName().compareTo(cityName) != 0) {
 
-                String pathTemp = path + cityName + ".csv";
+                String pathTemp = path + city.getName() + ".csv";
                 ArrayList<String[]> rows = ReadingCSVFiles.readFile(pathTemp);
                 ArrayList<Unit> units = createUnits(rows);
-                Army defArmy = new Army(cityName);
+                Army defArmy = new Army(city.getName());
                 defArmy.setUnits(units);
                 initializeParentArmy(defArmy, units);
                 city.setDefendingArmy(defArmy);
@@ -176,8 +176,8 @@ public class Game {
     int findDistance(String from, String to) {
 
         for (Distance dist : distances) {
-            if ((dist.getFromCity().equals(from) && dist.getToCity().equals(to))
-                    || (dist.getFromCity().equals(to) && dist.getToCity().equals(from)))
+            if ((dist.getFromCity().compareTo(from) == 0 && dist.getToCity().compareTo(to) == 0)
+                    || (dist.getFromCity().compareTo(to) == 0 && dist.getToCity().compareTo(from) == 0))
                 return dist.getDistance();
         }
 

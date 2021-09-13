@@ -1,12 +1,12 @@
 package engine;
 
 public class Distance {
-    
-    private String from; //The name of the city that the army will begin moving from
-    private String to;  //The name of the city that the army will move to
-    private int distance;   // the distance between the two cities
 
-    public Distance(String from,String to, int distance) {
+    private String from; // The name of the city that the army will begin moving from
+    private String to; // The name of the city that the army will move to
+    private int distance; // the distance between the two cities
+
+    public Distance(String from, String to, int distance) {
         this.from = from;
         this.to = to;
         this.distance = distance;
@@ -26,17 +26,18 @@ public class Distance {
 
     @Override
     public boolean equals(Object obj) {
-        
-        if (obj == this) return true;
-        
-        if(! (obj instanceof City)){
-    
+
+        if (obj == this)
+            return true;
+
+        if (!(obj instanceof City)) {
+
             return false;
         }
 
         Distance dist = (Distance) obj;
-        return dist.getFromCity().equals(this.getFromCity()) && dist.getToCity().equals(this.getToCity())
-         && this.distance == dist.distance;
+        return dist.getFromCity().compareTo(this.getFromCity()) == 0
+                && dist.getToCity().compareTo(this.getToCity()) == 0 && this.distance == dist.distance;
     }
 
 }
