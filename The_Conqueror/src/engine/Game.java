@@ -1,6 +1,10 @@
 package engine;
 
 import java.util.ArrayList;
+
+import buildings.EconomicBuilding;
+import buildings.MilitaryBuilding;
+
 import java.io.*;
 import units.*;
 
@@ -195,4 +199,74 @@ public class Game {
         army.setCurrenStatus(Status.MARCHING);
     }
 
+    private void resetBuildings() {
+        ArrayList<City> playerCities = player.getControlledCities();
+        for (City city : playerCities) {
+            ArrayList<MilitaryBuilding> militaryBuildings = city.getMilitaryBuildings();
+            ArrayList<EconomicBuilding> economicBuildings = city.getEconomicBuildings();
+
+            for (MilitaryBuilding mBuilding : militaryBuildings) {
+                mBuilding.setCurrentRecuruit(0);
+                mBuilding.setCoolDown(true);
+            }
+
+            for (EconomicBuilding eBuilding : economicBuildings)
+                eBuilding.setCoolDown(true);
+
+        }
+
+    }
+
+    private void incrementResources() {
+        ArrayList<City> playerCities = player.getControlledCities();
+        for (City city : playerCities) {
+            ArrayList<EconomicBuilding> economicBuildings = city.getEconomicBuildings();
+            for (EconomicBuilding eBuilding : economicBuildings) {
+                double currTreasury = player.getTreasury();
+                player.setTreasury(currTreasury + eBuilding.harvest());
+            }
+        }
+    }
+
+    private void decrementUnitsSoldiers(ArrayList<Unit> units) {
+        for (Unit unit : units) {
+            int currCount = unit.getCurrentSoldierCount();
+            currCount -= (currCount / 10);
+            unit.setCurrentSoldierCount(currCount);
+        }
+    }
+
+    private void foodNeeded() {
+        double food = 0.0;
+        ArrayList<City> playerCities = player.getControlledCities();
+        for (City city : playerCities) {
+            food = player.getFood() - city.getDefendingArmy().foodNeeded();
+            if (food <= 0) {
+                player.setFood(0);
+                decrementUnitsSoldiers(city.getDefendingArmy().getUnits());
+            }
+
+            else
+                player.setFood(food);
+
+        }
+
+    }
+
+    private void underSiegeCities() {
+        for (City city : availableCities) {
+            if (city.isUnderSiege()) {
+                city.setTurnsUnderSiege(city.getTurnsUnderSiege() + 1);
+                decrementUnitsSoldiers(city.getDefendingArmy().getUnits());
+            }
+        }
+    }
+
+    public void endTurn() {
+        currentTurnCount++;
+        resetBuildings();
+        incrementResources();
+        foodNeeded();
+        underSiegeCities();
+    }
 }
