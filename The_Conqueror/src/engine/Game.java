@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import buildings.EconomicBuilding;
 import buildings.MilitaryBuilding;
+import exceptions.FriendlyFireException;
 
 import java.io.*;
 import units.*;
@@ -262,11 +263,79 @@ public class Game {
         }
     }
 
+    private City findCity(String cityName) {
+        for (City city : availableCities) {
+            if (city.getName().compareTo(cityName) == 0)
+                return city;
+        }
+
+        return null;
+    }
+
+    public void occupy(Army a, String cityName) {
+        City city = findCity(cityName);
+        city.setDefendingArmy(a);
+        city.setUnderSiege(true);
+        city.setTurnsUnderSiege(1 + city.getTurnsUnderSiege());
+        player.addToControlledCIties(city);
+    }
+
+    private boolean isFriend(Army army) {
+        for (Army a : player.getControlledArmy()) {
+            if (a.equals(army))
+                return true;
+        }
+
+        return false;
+    }
+
+    /*
+     * private Unit getRandomUnit(ArrayList<Unit> units) {
+     * 
+     * return null; }
+     * 
+     * public void autoResolve(Army attacker, Army defender) throws
+     * FriendlyFireException { if (isFriend(attacker) && isFriend(defender)) throw
+     * new FriendlyFireException("It is not the enemy's army");
+     * 
+     * boolean attack = true; boolean attckWon = false; Unit attackUnit =
+     * getRandomUnit(attacker.getUnits()); Unit defendUnit =
+     * getRandomUnit(defender.getUnits());
+     * 
+     * while (attackUnit.getCurrentSoldierCount() > 0 &&
+     * defendUnit.getCurrentSoldierCount() > 0) { if (attack) {
+     * attackUnit.attack(defendUnit); }
+     * 
+     * else defendUnit.attack(attackUnit);
+     * 
+     * attack = !attack; }
+     * 
+     * }
+     */
+
     public void endTurn() {
         currentTurnCount++;
         resetBuildings();
         incrementResources();
         foodNeeded();
         underSiegeCities();
+    }
+
+    public boolean allOccupied() {
+        ArrayList<City> controlledCities = player.getControlledCities();
+        for (City city : availableCities) {
+            for (City controlled : controlledCities)
+                if (!city.equals(controlled))
+                    return false;
+        }
+
+        return true;
+    }
+
+    public boolean isGameOver() {
+        if (currentTurnCount > maxTurnCount)
+            return true;
+
+        return allOccupied();
     }
 }
