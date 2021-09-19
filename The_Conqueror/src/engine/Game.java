@@ -289,29 +289,51 @@ public class Game {
         return false;
     }
 
-    /*
-     * private Unit getRandomUnit(ArrayList<Unit> units) {
-     * 
-     * return null; }
-     * 
-     * public void autoResolve(Army attacker, Army defender) throws
-     * FriendlyFireException { if (isFriend(attacker) && isFriend(defender)) throw
-     * new FriendlyFireException("It is not the enemy's army");
-     * 
-     * boolean attack = true; boolean attckWon = false; Unit attackUnit =
-     * getRandomUnit(attacker.getUnits()); Unit defendUnit =
-     * getRandomUnit(defender.getUnits());
-     * 
-     * while (attackUnit.getCurrentSoldierCount() > 0 &&
-     * defendUnit.getCurrentSoldierCount() > 0) { if (attack) {
-     * attackUnit.attack(defendUnit); }
-     * 
-     * else defendUnit.attack(attackUnit);
-     * 
-     * attack = !attack; }
-     * 
-     * }
-     */
+    private Unit getRandomUnit(ArrayList<Unit> units) {
+
+        int size = units.size();
+        int indx = size * (int) Math.random();
+        return units.get(indx);
+    }
+
+    private boolean battle(Army attacker, Army defender) throws FriendlyFireException {
+        Unit attackUnit = getRandomUnit(attacker.getUnits());
+        Unit defendUnit = getRandomUnit(defender.getUnits());
+        boolean attack = true;
+        boolean win = true;
+        
+        while (attackUnit.getCurrentSoldierCount() > 0 && defendUnit.getCurrentSoldierCount() > 0) {
+            if (attack) {
+                attackUnit.attack(defendUnit);
+            }
+
+            else
+                defendUnit.attack(attackUnit);
+
+            if (attackUnit.getCurrentSoldierCount() <= 0) {
+                win = false;
+                break;
+            }
+
+            if (defendUnit.getCurrentSoldierCount() <= 0)
+                break;
+
+            attackUnit = getRandomUnit(attacker.getUnits());
+            defendUnit = getRandomUnit(defender.getUnits());
+            attack = !attack;
+        }
+
+        return win;
+    }
+
+    public void autoResolve(Army attacker, Army defender) throws FriendlyFireException {
+        if (isFriend(attacker) && isFriend(defender))
+            throw new FriendlyFireException("It is not the enemy's army");
+
+        boolean win = battle(attacker, defender);
+        if (win)
+            occupy(attacker, defender.getCurrentLocation());
+    }
 
     public void endTurn() {
         currentTurnCount++;
